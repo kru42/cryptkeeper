@@ -11,15 +11,14 @@ def load_pushover_config():
     }
 
 
-def send_pushover_notification(title, message, config):
+def send_pushover_notification(title, message, config, html: int = 0):
     url = "https://api.pushover.net/1/messages.json"
     data = {
         "token": config["api_token"],
         "user": config["user_key"],
         "title": title,
         "message": message,
+        "html": html,
     }
     response = requests.post(url, data=data)
-    print(response.text)
-    print(response.status_code)
     return response.status_code == 200
